@@ -7,6 +7,7 @@ import {
   Card as MuiCard,
   Typography,
 } from "@mui/material";
+import dayjs from "dayjs";
 import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +15,7 @@ interface NoteCardProps {
   id: string;
   title: string;
   content: string;
+  createdAt: string;
   onDelete: (id: string) => void;
 }
 
@@ -21,6 +23,7 @@ const NoteCard: React.FC<NoteCardProps> = ({
   id,
   title,
   content,
+  createdAt,
   onDelete,
 }) => {
   const navigate = useNavigate();
@@ -49,8 +52,22 @@ const NoteCard: React.FC<NoteCardProps> = ({
             sx={{ fontWeight: "bold", color: "#333" }}
           >
             {title}
+            <Typography
+              component="div"
+              sx={{
+                fontSize: "0.875rem",
+                color: "#888",
+              }}
+            >{`Created at: ${dayjs(createdAt).format(
+              "DD MMM, YYYY"
+            )}`}</Typography>
           </Typography>
-          <Box gap={2}>
+          <Box
+            gap={2}
+            display={"flex"}
+            alignSelf={"start"}
+            justifyContent={"flex-start"}
+          >
             <IconButton
               size="small"
               color="secondary"
@@ -77,6 +94,9 @@ const NoteCard: React.FC<NoteCardProps> = ({
             WebkitLineClamp: 1,
             marginTop: 1,
             color: "#555",
+            "& p": {
+              margin: "0 !important",
+            },
           }}
           dangerouslySetInnerHTML={{ __html: content }}
         />

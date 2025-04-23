@@ -116,6 +116,7 @@ const Home: React.FC = () => {
                   id={note.id}
                   title={note.title}
                   content={note.content}
+                  createdAt={note.timestamp}
                   onDelete={handleDelete}
                 />
               </Box>
